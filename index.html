@@ -11,7 +11,7 @@
 <body>
     <div class="app">
 
-        
+
         <header class="app-header">
             <div class="brand">
                 <span class="brand-mark"></span>
@@ -25,6 +25,16 @@
             </div>
         </header>
 
+        <div class="app-main">
+
+            <section class="ingredient-panel" aria-labelledby="ingredient-heading">
+                <h2 id="ingredient-heading">Your ingredients</h2>
+
+                <div class="selected-tray" id="selected-tray">
+                    <p class="empty-hint" id="selected-empty-hint">No ingredients selected yet . Add a few below to get started .</p>
+                </div>
+            </section>
+        </div>
 
         <div class="model-overlay" id="recipe-model" hidden>
             <div class="model" role="dialog" aria-modal="true">
