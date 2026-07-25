@@ -25,7 +25,7 @@
             </div>
         </header>
 
-        <div class="app-main">
+        <main class="app-main">
 
             <section class="ingredient-panel" aria-labelledby="ingredient-heading">
                 <h2 id="ingredient-heading">Your ingredients</h2>
@@ -89,13 +89,29 @@
                     </article>
                 </div>
             </section>
-        </div>
+        </main>
 
         <div class="model-overlay" id="recipe-model" hidden>
-            <div class="model" role="dialog" aria-modal="true">
+            <div class="model" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <button class="modal-close" id="modal-close-btn" type="button" aria-label="Close">×</button>
 
+                <h2 id="modal-title" class="modal-title">Recipe name</h2>
+                <p class="modal-meta">⏱ 25 min · Serves 4</p>
+
+                <h3 class="modal-subheading">Ingredients</h3>
+                <ul class="modal-ingredient-list" id="modal-ingredient-list">
+                    <li class="have">Chicken</li>
+                    <li class="need">Bell pepper</li>
+                </ul>
+
+                <h3 class="modal-subheading">Instructions</h3>
+                <ol class="modal-steps" id="modal-steps">
+                    <li>Step one goes here.</li>
+                    <li>Step two goes here.</li>
+                </ol>
             </div>
         </div>
+        
     </div>
     <script src="app.js"></script>
 </body>
