@@ -56,6 +56,20 @@
                     <button class="chip" type="button" data-ingredient="beans">Beans</button>
                 </div>          
             </section>
+
+            <section class="results-panel" aria-labelledby="results-heading">
+                <div class="results-header">
+                    <h2 id="results-heading">
+                        <span id="results-count">0</span> recipes match
+                    </h2>
+
+                    <select id="sort-select" aria-label="Sort recipes">
+                        <option value="match">Best match</option>
+                        <option value="time">Fastest to cook</option>
+                        <option value="az">Name (A–Z)</option>
+                    </select>
+                </div>
+            </section>
         </div>
 
         <div class="model-overlay" id="recipe-model" hidden>
