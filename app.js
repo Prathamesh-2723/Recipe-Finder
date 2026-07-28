@@ -148,3 +148,23 @@ function cardcreater(recipe) {
 }
 
 
+let result = searchinput.addEventListener("keydown" ,(event)=>{
+    if(event.key == "Enter"){
+        for(let i = 0 ; i<recipes.length ; i++){
+            // console.log(recipes[i].title)
+            // console.log(searchinput.value)
+            if (recipes[i].title === searchinput.value){
+                console.log(recipes[i].title);
+                console.log(recipes[i]);
+                recipes.forEach((recipes)=>{
+                    let card = cardcreater(recipes[i]);
+                    console.log(card)
+                    recipegrid.appendChild(card);
+                })
+                
+                
+                break;
+            }
+        }
+    }
+})
