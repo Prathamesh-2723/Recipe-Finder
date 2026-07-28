@@ -186,4 +186,42 @@ let ingredientresult = ingredientfilter.addEventListener("keydown" ,(event)=>{
     
 })
 
+for(let btns of btn){
+    btns.onclick =function(event){
+        clicked = event.target;
+        const clone = clicked.cloneNode(true);
+        if (selectedtray.childElementCount === 1) {
+                para.style.setProperty('display','none');
+            }
+        clone.addEventListener("click", function () {
+            clone.remove();
+            if (selectedtray.childElementCount === 1) {
+                para.style.setProperty('display','inline');
+            }
+            else{
+                para.style.setProperty('display','none');
+            }
+        });
+      selectedtray.appendChild(clone);
+        // clicked = event.target;
+        // selectedtray.appendChild(clicked.cloneNode(true));
+        // para.style.setProperty('display','none');
+        
+    };
+}
 
+clearbtn.addEventListener("click", () => {
+    if (selectedtray.childElementCount >= 1) {
+        while (selectedtray.firstChild) {
+            selectedtray.removeChild(selectedtray.firstChild);
+            console.log(selectedtray.childElementCount);
+        }
+
+        
+    }
+    if(selectedtray.childElementCount == 0){
+            selectedtray.appendChild(para);
+            para.style.setProperty('display','inline');
+        }
+    
+});
