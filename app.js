@@ -168,3 +168,22 @@ let result = searchinput.addEventListener("keydown" ,(event)=>{
         }
     }
 })
+//ingredients list 
+let ingredientresult = ingredientfilter.addEventListener("keydown" ,(event)=>{
+    
+        if(event.key == "Enter"){
+            selected = ingredientfilter.value;
+            let newbtn = document.createElement("button");
+            newbtn.className = 'chip';
+            newbtn.innerText = selected;
+            selectedtray.appendChild(newbtn);
+            if(selectedtray.contains(para)){
+                selectedtray.removeChild(para);
+            }
+            ingredientfilter.value = "";
+        }
+    
+    
+})
+
+
