@@ -103,3 +103,48 @@ const recipes = [
     ]
   }
 ];
+let searchinput = document.querySelector("#recipe-search");
+let selectedtray = document.querySelector("#selected-tray");
+let ingredientfilter = document.querySelector("#ingredient-filter");
+let btn = document.querySelectorAll(".chip");
+let para = document.querySelector(".empty-hint");
+let recipegrid = document.querySelector(".recipe-grid");
+let clearbtn = document.querySelector("#clear-ingredients-btn");
+let clicked;
+let searched ;
+let value = searchinput.value;
+
+function cardcreater(recipe) {
+  let article = document.createElement("article");
+  article.className = "recipe-card";
+
+  let icon = document.createElement("div");
+  icon.className = "recipe-thumb";
+  icon.innerText = recipe.icon;
+
+  let body = document.createElement("div");
+  body.className = "recipe-body";
+
+  let title = document.createElement("h3");
+  title.className = "recipe-title";
+  title.innerText = recipe.title;
+
+  let meta = document.createElement("p");
+  meta.className = "recipe-meta";
+  meta.innerText = "⏱ " + recipe.time + " min";
+
+  let badge = document.createElement("span");
+  badge.className = "match-badge";
+  badge.innerText = recipe.ingredients.length + " ingredients";
+
+  body.appendChild(title);
+  body.appendChild(meta);
+  body.appendChild(badge);
+
+  article.appendChild(icon);
+  article.appendChild(body);
+
+  return article; 
+}
+
+
