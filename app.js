@@ -112,6 +112,7 @@ let recipegrid = document.querySelector(".recipe-grid");
 let clearbtn = document.querySelector("#clear-ingredients-btn");
 let clicked;
 let searched ;
+let filters = document.querySelector("#sort-select");
 let value = searchinput.value;
 
 function cardcreater(recipe) {
@@ -150,21 +151,48 @@ function cardcreater(recipe) {
 
 let result = searchinput.addEventListener("keydown" ,(event)=>{
     if(event.key == "Enter"){
-        recipegrid.innerHTML = "";
-        let query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
-        for(let i = 0 ; i<recipes.length ; i++){
-            let title = recipes[i].title.toLowerCase().replace(/\s+/g, " ");
-            if (title.includes(query)){
-                // console.log(recipes[i].title);
-                // console.log(recipes[i]);
-                  let card = cardcreater(recipes[i]);
-                  console.log(card)
-                  recipegrid.appendChild(card);
-                // break;
-            }
-        }
+      recipegrid.innerHTML = "";
+      query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
+      applyfilter(filters);
+
+      
     }
 })
+
+function applyfilter(selectElement) {
+  console.log(selectElement.value);
+  if(selectElement.value){
+      let query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
+      for(let i = 0 ; i<recipes.length ; i++){
+          let title = recipes[i].title.toLowerCase().replace(/\s+/g, " ");
+          if (title.includes(query)){
+                let card = cardcreater(recipes[i]);
+                console.log(card)
+                recipegrid.appendChild(card);
+                  
+                // break;
+          }
+      }
+    }
+  selectElement.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    
+    if(event.target.value === "time") {
+      
+      let arr = [];
+      for(ingr of recipes){
+        arr.push(ingr.time);
+      }
+      console.log(Math.min(...arr));
+    }
+    
+    
+  });
+  
+}
+
+
+
 //ingredients list 
 let ingredientresult = ingredientfilter.addEventListener("keydown" ,(event)=>{
     
@@ -200,10 +228,6 @@ for(let btns of btn){
             }
         });
       selectedtray.appendChild(clone);
-        // clicked = event.target;
-        // selectedtray.appendChild(clicked.cloneNode(true));
-        // para.style.setProperty('display','none');
-        
     };
 }
 
