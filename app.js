@@ -153,43 +153,47 @@ let result = searchinput.addEventListener("keydown" ,(event)=>{
     if(event.key == "Enter"){
       recipegrid.innerHTML = "";
       query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
-      applyfilter(filters);
-
       
-    }
-})
-
-function applyfilter(selectElement) {
-  console.log(selectElement.value);
-  if(selectElement.value){
-      let query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
-      for(let i = 0 ; i<recipes.length ; i++){
-          let title = recipes[i].title.toLowerCase().replace(/\s+/g, " ");
-          if (title.includes(query)){
+      
+      console.log(filters.value);
+      if(filters.value){
+        let query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
+        for(let i = 0 ; i<recipes.length ; i++){
+            let title = recipes[i].title.toLowerCase().replace(/\s+/g, " ");
+            if (title.includes(query)){
                 let card = cardcreater(recipes[i]);
-                console.log(card)
+                // console.log(card)
                 recipegrid.appendChild(card);
                   
                 // break;
-          }
+            }
+        }
+
+      
       }
     }
-  selectElement.addEventListener("change", (event) => {
-    console.log(event.target.value);
+})
+
+
+filters.addEventListener("change", (event) => {
+    // console.log(event.target.value);
     
     if(event.target.value === "time") {
+      // console.log(event.target.value);
+      recipegrid.innerHTML = "";
+      let sorted = [...recipes].sort((a, b) => a.time - b.time);
       
-      let arr = [];
-      for(ingr of recipes){
-        arr.push(ingr.time);
-      }
-      console.log(Math.min(...arr));
+      sorted.forEach(recipe => {
+        // console.log(recipe)
+        card = cardcreater(recipe);
+        recipegrid.appendChild(card);
+      });
+      
     }
     
     
   });
   
-}
 
 
 
