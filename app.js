@@ -194,9 +194,6 @@ filters.addEventListener("change", (event) => {
     
   });
   
-
-
-
 //ingredients list 
 let ingredientresult = ingredientfilter.addEventListener("keydown" ,(event)=>{
     
