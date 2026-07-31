@@ -113,8 +113,8 @@ let clearbtn = document.querySelector("#clear-ingredients-btn");
 let clicked;
 let searched ;
 let filters = document.querySelector("#sort-select");
-let value = searchinput.value;
-
+// let value = searchinput.value;
+let resultcount = document.querySelector("#results-count");
 function cardcreater(recipe) {
   let article = document.createElement("article");
   article.className = "recipe-card";
@@ -153,8 +153,7 @@ let result = searchinput.addEventListener("keydown" ,(event)=>{
     if(event.key == "Enter"){
       recipegrid.innerHTML = "";
       query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
-      
-      
+      let count = 0;
       console.log(filters.value);
       if(filters.value){
         let query = searchinput.value.trim().replace(/\s+/g, " ").toLowerCase();
@@ -164,10 +163,11 @@ let result = searchinput.addEventListener("keydown" ,(event)=>{
                 let card = cardcreater(recipes[i]);
                 // console.log(card)
                 recipegrid.appendChild(card);
-                  
+                count ++;
                 // break;
             }
         }
+        resultcount.innerText = count ;
 
       
       }
@@ -177,7 +177,7 @@ let result = searchinput.addEventListener("keydown" ,(event)=>{
 
 filters.addEventListener("change", (event) => {
     // console.log(event.target.value);
-    
+    count = 0;
     if(event.target.value === "time") {
       // console.log(event.target.value);
       recipegrid.innerHTML = "";
@@ -187,7 +187,9 @@ filters.addEventListener("change", (event) => {
         // console.log(recipe)
         card = cardcreater(recipe);
         recipegrid.appendChild(card);
+        count++;
       });
+      resultcount.innerText = count ;
       
     }
     
@@ -212,24 +214,46 @@ let ingredientresult = ingredientfilter.addEventListener("keydown" ,(event)=>{
     
 })
 
-for(let btns of btn){
-    btns.onclick =function(event){
-        clicked = event.target;
-        const clone = clicked.cloneNode(true);
-        if (selectedtray.childElementCount === 1) {
-                para.style.setProperty('display','none');
-            }
-        clone.addEventListener("click", function () {
-            clone.remove();
-            if (selectedtray.childElementCount === 1) {
-                para.style.setProperty('display','inline');
-            }
-            else{
-                para.style.setProperty('display','none');
-            }
-        });
-      selectedtray.appendChild(clone);
-    };
+let selectedIngredients = []; 
+for (let btns of btn) {
+  btns.onclick = function (event) {
+    let ingredient = btns.innerText.trim().replace(/\s+/g, " ").toLowerCase();
+
+    if (!selectedIngredients.includes(ingredient)) {
+      selectedIngredients.push(ingredient);
+    }
+
+    const clone = btns.cloneNode(true);
+    clone.addEventListener("click", function () {
+      clone.remove();
+      selectedIngredients = selectedIngredients.filter(i => i !== ingredient);
+      para.style.display = selectedIngredients.length === 0 ? "inline" : "none";
+      renderFilteredRecipes();
+    });
+    selectedtray.appendChild(clone);
+    para.style.display = "none";
+
+    renderFilteredRecipes();
+  };
+}
+
+function renderFilteredRecipes() {
+  recipegrid.innerHTML = ""; 
+  let count = 0;
+
+  for (let i = 0; i < recipes.length; i++) {
+    let hasMatch = recipes[i].ingredients.some(ing =>
+      selectedIngredients.includes(ing)
+    );
+
+    if (hasMatch) {
+      let card = cardcreater(recipes[i]);
+      recipegrid.appendChild(card);
+      count++;
+    }
+  }
+
+  resultcount.innerText = count;
 }
 
 clearbtn.addEventListener("click", () => {
