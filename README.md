@@ -2,7 +2,7 @@
 
 A web app that lets you select ingredients you already have in your kitchen and instantly see which recipes you can make  -  ranked by how closely each one matches what's in you cooksync . Search by name , sort by best match/ fastest to cook / A-Z , and click into any recipe for full ingredients and step by step instructions.
 
-Live demo :https://prathamesh-2723.github.io/Recipe-Finder/
+Live demo :<a href = https://prathamesh-2723.github.io/Recipe-Finder/>Recipe-Finder </a>
 
 ![alt text](image.png)
 
